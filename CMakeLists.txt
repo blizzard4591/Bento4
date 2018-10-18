@@ -3,6 +3,8 @@
 cmake_minimum_required(VERSION 2.8)
 project(bento4)
 
+option(BENTO4_BUILD_APPS "Sets whether the apps should be build." ON)
+
 # Variables
 set(SOURCE_ROOT Source/C++)
 set(SOURCE_CODECS ${SOURCE_ROOT}/Codecs)
@@ -43,10 +45,12 @@ include_directories(
   ${SOURCE_METADATA}
 )
 
-# Apps
-set(BENTO4_APPS "Aac2Mp4;Mp42Aac;Mp42Ts;Mp42Hls;Mp4Compact;Mp4DcfPackager;Mp4Decrypt;Mp4Dump;Mp4Edit;Mp4Encrypt;Mp4Extract;Mp4Fragment;Mp4Info;Mp4Mux;Mp4Split;Mp4Tag;Mp4Diff;Mp4IframeIndex")
-foreach(app ${BENTO4_APPS})
-  string(TOLOWER ${app} binary_name)
-  add_executable(${binary_name} ${SOURCE_ROOT}/Apps/${app}/${app}.cpp)
-  target_link_libraries(${binary_name} ap4)
-endforeach()
+if (BENTO4_BUILD_APPS)
+	# Apps
+	set(BENTO4_APPS "Aac2Mp4;Mp42Aac;Mp42Ts;Mp42Hls;Mp4Compact;Mp4DcfPackager;Mp4Decrypt;Mp4Dump;Mp4Edit;Mp4Encrypt;Mp4Extract;Mp4Fragment;Mp4Info;Mp4Mux;Mp4Split;Mp4Tag;Mp4Diff;Mp4IframeIndex")
+	foreach(app ${BENTO4_APPS})
+	  string(TOLOWER ${app} binary_name)
+	  add_executable(${binary_name} ${SOURCE_ROOT}/Apps/${app}/${app}.cpp)
+	  target_link_libraries(${binary_name} ap4)
+	endforeach()
+endif(BENTO4_BUILD_APPS)
