@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(bento4)
 
-option(BENTO4_BUILD_APPS "Sets whether the apps should be build." ON)
+option(BENTO4_BUILD_APPS "Sets whether the apps should be build." OFF)
 
 # Variables
 set(SOURCE_ROOT Source/C++)
@@ -14,7 +14,7 @@ set(SOURCE_METADATA ${SOURCE_ROOT}/MetaData)
 set(SOURCE_SYSTEM ${SOURCE_ROOT}/System)
 
 # Compiler warning and optimization flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wd4365 -Wd4820 -Wd4514 -Wd5027 -Wd4626")
 
 if (EMSCRIPTEN)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths")
